@@ -1,0 +1,94 @@
+/*
+**
+** version: python 3.6.5 
+** personal summary 
+** 2018年6月8日
+**
+*/
+
+/*
+** characters -> bytes  (encode)
+*/
+
+1. '金木水火土'.encode('utf8')	b'\xe9\x87\x91\xe6\x9c\xa8\xe6\xb0\xb4\xe7\x81\xab\xe5\x9c\x9f'
+2. '金木水火土'.encode('gb2312')	b'\xbd\xf0\xc4\xbe\xcb\xae\xbb\xf0\xcd\xc1'
+3. "金木水火土".encode('utf16')	b'\xff\xfe\xd1\x91(g4lkp\x1fW'
+4. "金木水火土".encode('utf-16-le')	b'\xd1\x91(g4lkp\x1fW'
+5. "金木水火土".encode('utf-16-be')	b'\x91\xd1g(l4pkW\x1f'
+
+/*
+	gb2312
+	金
+	0xbd 0xf0 机器码
+	0x3d 0x70 国标码
+	0x1d 0x50 区位码 (29,80)
+*/
+
+/*
+**bytes -> characters  (decode)
+*/
+
+5. b'\x91\xd1g(l4pkW\x1f'.decode('utf-16-be')	'金木水火土'
+   b'\x91\xd1g(l4pkW\x1f'.decode('utf-16-le')	'톑⡧㑬歰ὗ'
+   b'\x91\xd1g(l4pkW\x1f'.decode('utf-16')	'톑⡧㑬歰ὗ'
+   b'\x91\xd1g(l4pkW\x1f'.decode('gb2312')	UnicodeDecodeError
+
+# see module codecs for more informations
+
+
+/*********************************************************/
+/*
+** commonly used functionality
+*/
+import sys
+sys.byteorder   => 'little' or 'big'
+
+sys.getfilesystemencoding()
+
+
+/*********************************************************/
+/*
+** struct
+** example from the python manual
+*/
+import struct
+
+struct.calcsize('i')
+struct.calcsize('s')
+
+struct.pack('hhl', 1, 2, 3)
+	=> b'\x01\x00\x02\x00\x03\x00\x00\x00'
+struct.unpack('hhl', b'\x01\x00\x02\x00\x03\x00\x00\x00')
+	=> (1, 2, 3)
+struct.calcsize('hhl')
+	=> 8
+
+/*
+*	struct.pack(fmt, v1, v2, ...) 
+*	struct.unpack(fmt, buffer) 
+*   ......
+*	...
+*
+*	the first character of fmt could be '@', '=', '<', '>', '!'
+*	to indicate the byte order, size and alignment of the packed data.
+*
+*/	
+struct.pack('ci', b'*', 0x12131415)  #alignment, pad bytes
+	=> b'*\x00\x00\x00\x15\x14\x13\x12'
+struct.pack('ic', 0x12131415, b'*')
+	=> b'\x15\x14\x13\x12*'
+
+struct.calcsize('ci')=>8
+struct.calcsize('ic')=>5
+**********************************************
+struct.pack('<ci', b'*', 0x12131415) #no pad bytes
+	=> b'*\x15\x14\x13\x12'
+
+
+struct.pack('llh', 1, 2, 3)
+	=> b'\x01\x00\x00\x00\x02\x00\x00\x00\x03\x00'
+struct.calcsize('llh')=>10
+struct.pack('llh0l', 1, 2, 3)
+	=> b'\x01\x00\x00\x00\x02\x00\x00\x00\x03\x00\x00\x00'
+struct.calcsize('llh0l')=>12
+struct.calcsize('<llh0l')=>10
