@@ -19,5 +19,5 @@ def gb2312_20180608():
 			print(b, figure, struct.unpack('>H',b))
 		print('\n')
 
-if __name__ = '__main__':
+if __name__ == '__main__':
 	gb2312_20180608()
