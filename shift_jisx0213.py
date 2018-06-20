@@ -11,6 +11,7 @@ import struct
 def shift_jisx0213():
 	"""
 	get the shift_jisx0213 character glyphs.
+	the parameters are obtained from Internet.
 	"""
 	# m = 1, plane 1
 	for k in range(1,95):
