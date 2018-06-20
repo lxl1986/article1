@@ -7,3 +7,4 @@
 if u understand Characters, the only thing u want to do is to encode them to bytes.
 2. file1.png (use MS mspaint, oops!) draws a incomplete picture about the linux fd.
 3. gbgb2312_20180608.py just shows the gb2312 character table, but some codepoints are undefined. 
+4. shift_jisx0213.py shows the specified character table, the reference files are [s1.svg](./s1.svg), [s2.svg](./s2.svg), [233.pdf](./233.pdf), [299.pdf](./299.pdf), along with some webpages, [Shift JIS](https://en.wikipedia.org/wiki/Shift_JIS), etc.
