@@ -22,6 +22,7 @@
 	0xbd 0xf0 机器码
 	0x3d 0x70 国标码
 	0x1d 0x50 区位码 (29,80)
+	these terms, （机器码/国标码/区位码）,may not be accurate.
 */
 
 /*
