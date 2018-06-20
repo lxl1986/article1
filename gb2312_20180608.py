@@ -3,6 +3,7 @@
 import sys
 import struct
 
+# 区位码 GB 2312 (1980)
 # row		[1..94]
 # column	[1..94]
 
@@ -16,6 +17,7 @@ def gb2312_20180608():
 		for column in range(1,95):
 			b = struct.pack('2B', row + 0xA0, column + 0xA0)
 			figure = b.decode('gb2312', 'ignore')
+			# better writing into a diskfile with specifid format
 			print(b, figure, struct.unpack('>H',b))
 		print('\n')
 
