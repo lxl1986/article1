@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import sys
 import struct
 
 # m, plane [1,2]
